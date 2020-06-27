@@ -7,7 +7,9 @@ const TableContainer = styled("table")(styles.container);
 
 const renderCellData = cells =>
   Array.isArray(cells) ? (
-    cells.map((cell, index) => <TableCell key={index}>{cell}</TableCell>)
+    cells.map(
+      (cell, index) => index < 4 && <TableCell key={index}>{cell}</TableCell>
+    )
   ) : (
     <TableCell>{cells}</TableCell>
   );
