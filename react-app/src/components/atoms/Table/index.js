@@ -1,29 +1,27 @@
 import React from "react";
+import styled from "@emotion/styled";
+// styles
+import styles from "./table.styles";
+const TableCell = styled("td")(styles.cell);
+const TableContainer = styled("table")(styles.container);
 
 const renderCellData = cells =>
   Array.isArray(cells) ? (
-    cells.map((cell, index) => (
-      <td style={{ border: "1px solid black" }} key={index}>
-        {cell}
-      </td>
-    ))
+    cells.map((cell, index) => <TableCell key={index}>{cell}</TableCell>)
   ) : (
-    <td style={{ border: "1px solid black" }}>{cells}</td>
+    <TableCell>{cells}</TableCell>
   );
 
 const renderRowData = rowData => {
   return rowData && rowData.length
-    ? rowData.map((row, index) => {
-        console.log("ROW", row.length);
-        return <tr key={index}>{renderCellData(row)}</tr>;
-      })
+    ? rowData.map((row, index) => <tr key={index}>{renderCellData(row)}</tr>)
     : null;
 };
 
 const Table = ({ data }) => (
-  <table style={{ width: "100%" }}>
+  <TableContainer>
     <tbody>{renderRowData(data)}</tbody>
-  </table>
+  </TableContainer>
 );
 
 export default Table;

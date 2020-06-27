@@ -1,8 +1,13 @@
 import React from "react";
+import styled from "@emotion/styled";
+// components
 import InputLabel from "../../molecules/InputLabel";
+// styles.
+import styles from "./userInputGroup.styles";
+const Container = styled("div")(styles.container);
 
 const UserInputGroup = ({ handleDelimiterData, handleLinesData }) => (
-  <div style={{ display: "flex" }}>
+  <Container>
     <InputLabel
       labelText="Delimiter"
       inputType="text"
@@ -13,7 +18,7 @@ const UserInputGroup = ({ handleDelimiterData, handleLinesData }) => (
       inputType="text"
       handleInputChange={handleLinesData}
     />
-  </div>
+  </Container>
 );
 
 export default UserInputGroup;

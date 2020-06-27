@@ -1,50 +1,47 @@
 import React from "react";
+import styled from "@emotion/styled";
+// components.
 import UserInputGroup from "../organisms/UserInputGroup";
 import Table from "../atoms/Table";
 import DropZone from "../molecules/DropZone";
+// styles
+import styles from "./home.styles";
+const Container = styled("div")(styles.container);
 
 class Home extends React.Component {
   state = {
-    fileData: null,
-    delimiter: ";",
+    delimiter: ",",
     lines: 2
   };
 
-  setFileData = data => this.setState({ fileData: data });
-
   setDelimiterData = value => {
-    const { fileData } = this.state;
-    this.setState(
-      { delimiter: value },
-      () => fileData && this.state.delimiter && this.updateFileData()
-    );
-  };
-
-  updateFileData = () => {
-    const { fileData, delimiter } = this.state;
-    let updatedData = fileData.map(line => {
-      console.log("line", line);
-      if (delimiter && !Array.isArray(line)) return line.split(delimiter);
-      return line;
+    const {
+      fileUpload: { fileData },
+      actions: { updateFileData }
+    } = this.props;
+    this.setState({ delimiter: value }, () => {
+      const { delimiter } = this.state;
+      return fileData && delimiter ? updateFileData(fileData, delimiter) : null;
     });
-
-    this.setState({ fileData: updatedData });
   };
 
   setLinesData = value => this.setState({ lines: value });
 
   render() {
-    const { fileData } = this.state;
-    console.log("STATE", this.state);
+    const {
+      fileUpload: { fileData },
+      actions: { initFileUpload }
+    } = this.props;
+
     return (
-      <div style={{ padding: "50px" }}>
-        <DropZone setFileData={this.setFileData} />
+      <Container>
+        <DropZone setFileData={data => initFileUpload(data)} />
         <UserInputGroup
           handleDelimiterData={this.setDelimiterData}
           handleLinesData={this.setLinesData}
         />
         <Table data={fileData} />
-      </div>
+      </Container>
     );
   }
 }

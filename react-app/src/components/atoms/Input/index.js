@@ -1,28 +1,22 @@
 import React from "react";
+import styled from "@emotion/styled";
 
+// styles
+import styles from "./input.styles";
+
+const InputConatiner = styled("input")(styles.input);
 const handleInputChange = (event, callback) => {
   event.preventDefault();
-  const value = event.target.value;
-  callback(value);
+  callback(event.target.value);
 };
 
 const handleFileInput = (event, callback) => {
-  const file = event.target.files;
-  if (file.length) {
-    const reader = new FileReader();
-    reader.readAsText(file[0], "UTF-8");
-    reader.onload = evt => {
-      const contents = evt.target.result;
-      const lines = contents.split("\n");
-      callback(lines);
-    };
-    // to load file with same file name, we have to reset
-    event.target.value = "";
-  }
+  event.preventDefault();
+  callback(event.target.files);
 };
 
 const Input = ({ type, name, changeHandler }) => (
-  <input
+  <InputConatiner
     type={type}
     name={name}
     onChange={event =>
@@ -30,7 +24,6 @@ const Input = ({ type, name, changeHandler }) => (
         ? handleFileInput(event, changeHandler)
         : handleInputChange(event, changeHandler)
     }
-    style={{ padding: "1px", margin: "10px" }}
   />
 );
 

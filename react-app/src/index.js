@@ -1,12 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Home from "./components/pages/home";
+import React, { StrictMode } from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+// reducer
+import rootReducer from "./reducers";
+// components
+import Home from "./containers/home";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>,
+const composeEnhancers =
+  // eslint-disable-next-line no-underscore-dangle
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
+
+render(
+  <StrictMode>
+    <Provider store={store}>
+      <Home />
+    </Provider>
+  </StrictMode>,
   document.getElementById("root")
 );
 

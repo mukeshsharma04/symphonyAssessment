@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+<div
+  className="css-83mdml"
+>
+  <div>
+    <input
+      className="css-1nvkxsy"
+      onChange={[Function]}
+      type="file"
+    />
+  </div>
+  <div
+    className="css-k008qs"
+  >
+    <div
+      style={
+        Object {
+          "margin": "5px",
+        }
+      }
+    >
+      <label>
+        Delimiter
+      </label>
+      <input
+        className="css-1nvkxsy"
+        onChange={[Function]}
+        type="text"
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "5px",
+        }
+      }
+    >
+      <label>
+        Lines
+      </label>
+      <input
+        className="css-1nvkxsy"
+        onChange={[Function]}
+        type="text"
+      />
+    </div>
+  </div>
+  <table
+    className="css-8atqhb"
+  >
+    <tbody />
+  </table>
+</div>
+`;
